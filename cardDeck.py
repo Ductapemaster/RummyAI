@@ -29,7 +29,7 @@ class Deck:
 				player.hand.append(self.deck.pop())
 	
 	# Pop off the top card of the deck and return it
-	def getTopCard(self)
+	def getTopCard(self):
 		return self.deck.pop()
 		
 class RummyPlayer:
@@ -51,11 +51,9 @@ class Rummy:
 		self.players = []
 		self.drawPile = []
 		
-		for num in (numPlayers - 1):
+		for num in range(numPlayers):
 			self.players.append(RummyPlayer())
 
 		self.deck.dealHands(7, self.players)
 		self.drawPile.append(self.deck.getTopCard())
-
-	
 
