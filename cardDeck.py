@@ -19,6 +19,13 @@ class Deck:
 			for rank in range(1,14):
 				self.deck.append(Card(rank, suit))
 				
+	def __repr__(self):
+		outputStr = ""
+		for card in self.deck:
+			outputStr += card.__repr__()
+			outputStr += "\n"
+		return outputStr
+	
 	def shuffle(self):
 		random.shuffle(self.deck)
 		
