@@ -1,6 +1,6 @@
 import unittest
 
-from cardDeck import *
+from Card import *
 
 class CardTests(unittest.TestCase):
 

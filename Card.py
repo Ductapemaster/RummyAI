@@ -63,4 +63,6 @@ class Rummy:
 
 		self.deck.dealHands(7, self.players)
 		self.drawPile.append(self.deck.getTopCard())
+		
+	
 
