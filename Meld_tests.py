@@ -77,37 +77,37 @@ class MeldTests(unittest.TestCase):
 		test_cards_1 = [Card(5,1), Card(5,2), Card(5,4)]
 		test_cards_2 = [Card(5,3)]
 		m = Meld(test_cards_1)
-		self.assertEqual(m.canCombineWith(test_cards_2), True)
+		self.assertEqual(m.canCombineWith(Meld(test_cards_2)), True)
 		
 	def test_can_combine_with_method_with_valid_three_plus_two_straight(self):
 		test_cards_1 = [Card(2,1), Card(1,1), Card(3,1)]
 		test_cards_2 = [Card(5,1), Card(4,1)]
 		m = Meld(test_cards_1)
-		self.assertEqual(m.canCombineWith(test_cards_2), True)
+		self.assertEqual(m.canCombineWith(Meld(test_cards_2)), True)
 		
 	def test_can_combine_with_method_with_invalid_three_plus_one_of_a_kind(self):
 		test_cards_1 = [Card(5,1), Card(5,2), Card(5,4)]
 		test_cards_2 = [Card(11,3)]
 		m = Meld(test_cards_1)
-		self.assertEqual(m.canCombineWith(test_cards_2), False)
+		self.assertEqual(m.canCombineWith(Meld(test_cards_2)), False)
 		
 	def test_can_combine_with_method_with_invalid_three_plus_two_straight(self):
 		test_cards_1 = [Card(1,1), Card(2,1), Card(3,1)]
 		test_cards_2 = [Card(4,1), Card(6,1)]
 		m = Meld(test_cards_1)
-		self.assertEqual(m.canCombineWith(test_cards_2), False)
+		self.assertEqual(m.canCombineWith(Meld(test_cards_2)), False)
 	
 	def test_can_combine_with_method_with_invalid_run_of_two(self):
 		test_card_1 = [Card(1,2)]
 		test_card_2 = [Card(2,1)]
 		m = Meld(test_card_1)
-		self.assertEqual(m.canCombineWith(test_card_2), False)
+		self.assertEqual(m.canCombineWith(Meld(test_card_2)), False)
 		
 	def test_can_combine_with_method_with_valid_run_of_two(self):
 		test_card_1 = [Card(12,2)]
 		test_card_2 = [Card(13,2)]
 		m = Meld(test_card_1)
-		self.assertEqual(m.canCombineWith(test_card_2), True)
+		self.assertEqual(m.canCombineWith(Meld(test_card_2)), True)
 		
 
 if __name__ == '__main__':
