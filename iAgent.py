@@ -4,7 +4,7 @@ class IAgent():
 	def getDrawAction(self):
 		pass
 
-	def getMeldAction(self):
+	def getMeldActions(self):
 		pass
 	
 	def getDiscardAction(self):

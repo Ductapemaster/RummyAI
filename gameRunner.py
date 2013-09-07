@@ -37,7 +37,7 @@ class GameRunner():
 
 			# make the draw action happen
 
-			meld = self.agents[cur_player].getMeldAction()
+			meld = self.agents[cur_player].getMeldActions()
 
 			# verify meld is vaild
 
@@ -52,7 +52,7 @@ class GameRunner():
 
 			# if self.game.player[cur_player].hand.size() == 0:
 				#self.winner = cur_player
-				#return self.winner
+				#break
 
 
 			# let the next player go
