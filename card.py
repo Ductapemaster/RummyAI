@@ -21,3 +21,12 @@ class Card:
 		else:
 			return False
 
+
+	def numPoints(self):
+		if self.rank > 9:
+			return 10
+		elif self.rank == 1:
+			return 15
+		else:
+			return 5
+

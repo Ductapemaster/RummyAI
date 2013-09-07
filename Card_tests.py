@@ -28,6 +28,24 @@ class CardTests(unittest.TestCase):
 		self.assertEqual(c.rank, rank)
 		self.assertEqual(c.suit, suit)
 
+	def test_numPoints_returns_5_for_regular_cards(self):
+		for r in range(2,10):
+			for s in range(1,5):
+				c = Card(r, s)
+				self.assertEqual(c.numPoints(), 5)
+
+	def test_numPoints_returns_10_for_face_and_10_cards(self):
+		for r in range(10,14):
+			for s in range(1,5):
+				c = Card(r, s)
+				self.assertEqual(c.numPoints(), 10)
+
+	def test_numPoints_returns_15_for_ace_cards(self):
+		r = 1
+		for s in range(1,5):
+			c = Card(r, s)
+			self.assertEqual(c.numPoints(), 15)
+
 if __name__ == '__main__':
 	unittest.main()
 
