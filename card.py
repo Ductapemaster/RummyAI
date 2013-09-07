@@ -12,7 +12,7 @@ class Card:
 		suits = {0: '0', 1: 'S', 2: 'H', 3: 'C', 4: 'D'}
 		# Return face card rank if in dict, otherwise return string of the rank (2-9)
 		readable_rank = face_cards.get(self.rank, str(self.rank))
-		readable_suit = face_cards.get(self.suit)
+		readable_suit = suits.get(self.suit)
 		return "<Card %s %s>" % (readable_rank, readable_suit)
 		
 	def __eq__(self, other):

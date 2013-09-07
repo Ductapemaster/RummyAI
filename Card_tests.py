@@ -16,7 +16,7 @@ class CardTests(unittest.TestCase):
 	
 	def test_constructor_with_face_card(self):
 		rank = 12
-		suit = 2
+		suit = 3
 		c = Card(rank, suit)
 		self.assertEqual(c.rank, rank)
 		self.assertEqual(c.suit, suit)

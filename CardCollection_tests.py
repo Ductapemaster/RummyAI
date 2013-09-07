@@ -87,6 +87,19 @@ class CardTests(unittest.TestCase):
 			cc.addCard(c)
 		self.assertEqual(cc.removeCard(test_cards[1]), test_cards[1])
 		self.assertEqual(cc.removeCard(test_cards[0]), test_cards[0])
+	
+	def test_num_cards_method_with_one_card(self):
+		cc = CardCollection()
+		test_card = Card(2, 2)
+		cc.addCard(test_card)
+		self.assertEqual(cc.numCards(), 1)
+		
+	def test_num_cards_method_with_multiple_card(self):
+		cc = CardCollection()
+		test_cards = [Card(2, 2), Card(13, 4), Card(7, 1), Card(1, 3)]
+		for c in test_cards:
+			cc.addCard(c)
+		self.assertEqual(cc.numCards(), len(test_cards))
 		
 if __name__ == '__main__':
 	unittest.main()

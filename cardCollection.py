@@ -34,3 +34,6 @@ class CardCollection:
 	def makeEmpty(self):
 		self.cards = []
 		
+	def numCards(self):
+		return len(self.cards)
+		
