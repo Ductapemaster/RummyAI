@@ -49,10 +49,11 @@ class GameRunner():
 
 			# Meld Phase
 
-			meld = self.agents[cur_player].getMeldActions()
+			melds = self.agents[cur_player].getMeldActions()
 
-			# verify meld is vaild
-			# make the meld action happen
+			success = self.game.applyMeldAction(cur_player, melds)
+			if not success:
+				return False
 
 			# Discard Phase
 

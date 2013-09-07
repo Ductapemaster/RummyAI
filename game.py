@@ -20,6 +20,8 @@ class Game:
 		# create a discard pile and add one card to it
 		self.discard_pile = []
 		self.discard_pile.append(self.draw_pile.getTopCard())
+		self.last_card_removed_from_discard_pile = Card()
+		self.last_draw_action = 0
 
 	def __repr__(self):
 		draw_pile_str = "Draw Pile:\n\tCards Left: %d\n\n" % (self.draw_pile.cardsLeft())
@@ -67,7 +69,47 @@ class Game:
 
 			for i in range(action):
 				c = self.discard_pile.pop()
+				self.last_card_removed_from_discard_pile = c
 				self.player[player_num].draw(c)
+
+		return True
+
+
+	def applyMeldAction(self, player_num, melds):
+		# if an agent picks up, make sure it's using the last card 
+		if self.last_draw_action > 0:
+			using_last_picked_up_card = False
+			for m in melds:
+				for c in m.cards:
+					if c == self.last_card_removed_from_discard_pile:
+						using_last_picked_up_card = True
+				if using_last_picked_up_card:
+					break
+			if not using_last_picked_up_card:
+				return False
+
+		for m in melds:
+			can_meld = False
+
+			if m.isIndependentMeld():
+				self.players[player_num].board.append(m)
+				can_meld = True
+				continue
+
+			for p in self.players:
+				for om in p.board:
+					# TODO: do meld type checking here
+					if m.canCombineWith(om):
+						self.players[player_num].board.append(m)
+						can_meld = True
+						break
+				if can_meld:
+					break
+			if can_meld:
+				continue	
+
+			return False
+		
 
 		return True
 			

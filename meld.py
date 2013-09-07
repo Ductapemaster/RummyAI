@@ -62,6 +62,6 @@ class Meld:
 	# from the board and results in a valid meld
 	def canCombineWith(self, meld_on_board):
 		combined_cards = self.cards
-		combined_cards.extend(meld_on_board)
+		combined_cards.extend(meld_on_board.cards)
 		test_meld = Meld(combined_cards)
 		return test_meld.isValidMeld()
