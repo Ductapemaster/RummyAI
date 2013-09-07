@@ -1,18 +1,18 @@
 import unittest
 
-from card import *
+from iAgent import *
 
 class IAgentTests(unittest.TestCase):
 
 	def setUp(self):
 		pass
 
-	def test_constructor_works_as_expected(self):
-		rank = 1
-		suit = 2
-		c = Card(rank, suit)
-		self.assertEqual(c.rank, rank)
-		self.assertEqual(c.suit, suit)
+	def test_setPlayerNumber_works(self):
+		player_number = 2
+		a = IAgent()
+		a.setPlayerNumber(player_number)
+		
+		self.assertEqual(a.player_number, player_number)
 
 if __name__ == '__main__':
 	unittest.main()

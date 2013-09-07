@@ -1,7 +1,7 @@
 #null card is rank = 0, suit = 0
 
 class Card:
-	def __init__(self, rank, suit):
+	def __init__(self, rank=0, suit=0):
 		self.rank = rank
 		self.suit = suit
 		

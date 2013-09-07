@@ -42,3 +42,16 @@ class Game:
 	def numPlayers(self):
 		return len(self.players)
 
+	def getPlayersCopyForAgent(self, agent_num):
+		copy = []
+		for i in range(len(self.players)):
+			if i != agent_num:
+				copy.append(self.players[i].getCopyNullHand())
+			else:
+				copy.append(self.players[i].getCopy())
+		return copy
+
+	def getDiscardPileCopy(self):
+		return self.discard_pile.copy()
+
+

@@ -15,14 +15,19 @@ class GameRunner():
 		if self.num_players < 2:
 			raise ValueError("Not enough players!")
 
-		self.agents = agents
-
+		# Setup the game
 		self.game = Game(self.num_players)
 
+		# Setup the agents
+		self.agents = agents
+		for i in range(self.num_players):
+			self.agents[i].setPlayerNumber(i)
+
+		self.updateAgentsWithGameState()
+
+		# set some internal variables
 		self.starting_player = starting_player
 		self.winner = -1
-		
-		
 
 
 	def playGame(self):
@@ -54,6 +59,8 @@ class GameRunner():
 				#self.winner = cur_player
 				#break
 
+			
+			self.updateAgentsWithGameState()
 
 			# let the next player go
 			cur_player = (cur_player + 1) % self.num_players
@@ -63,4 +70,11 @@ class GameRunner():
 
 
 			
+	def updateAgentsWithGameState(self):
+
+		for i in range(self.num_players):
+			players = self.game.getPlayersCopyForAgent(i)
+			discard_pile = self.game.getDiscardPileCopy()
+
+			self.agents[i].updateGameState(players, discard_pile)
 
