@@ -3,7 +3,7 @@ import random
 class Deck:
 	def __init__(self):
 		self.deck = []
-		for suit in 'SCHD':
+		for suit in 'SHCD':
 			for rank in range(1,14):
 				self.deck.append(Card(rank, suit))
 				
