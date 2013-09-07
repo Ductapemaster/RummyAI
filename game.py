@@ -21,6 +21,24 @@ class Game:
 		self.discard_pile = []
 		self.discard_pile.append(self.draw_pile.getTopCard())
 
+	def __repr__(self):
+		draw_pile_str = "Draw Pile:\n\tCards Left: %d\n\n" % (self.draw_pile.cardsLeft())
+
+		discard_pile_str = "Discard Pile:\n\t"
+		for c in self.discard_pile:
+			discard_pile_str += c.__repr__() + ", "
+		discard_pile_str += "\n\n"
+
+		player_str = ""
+		for p in range(len(self.players)):
+			player_str += "Player %d:\n\tBoard:\n" % (p+1)
+			#print melds	
+			player_str += "\n\tHand:\n"
+			#print hand	
+
+		return draw_pile_str + discard_pile_str + player_str
+
+
 	def numPlayers(self):
 		return len(self.players)
 
