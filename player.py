@@ -6,7 +6,11 @@ class Player:
 		self.board = []
 	
 	def discard(self, card):
-		return self.hand.remove(card)
+		try:
+			self.hand.remove(card)
+		except ValueError:
+			return False
+		return True
 
 	def draw(self, card):
 		self.hand.append(card)

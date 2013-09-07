@@ -55,7 +55,7 @@ class Game:
 		return copy
 
 	def applyDrawAction(self, player_num, action):
-		if player_num < 0:
+		if player_num < 0 or player_num >= self.numPlayers:
 			return False
 
 		if action == 0:
@@ -71,6 +71,15 @@ class Game:
 
 		return True
 			
+	def applyDiscardAction(self, player_num, card):
+		if player_num < 0 or player_num >= self.numPlayers:
+			return False
+
+		if self.player[player_num].discard(card) == False:
+			return False
+
+		self.discard_pile.append(card)
+		return True
 			
 			
 
