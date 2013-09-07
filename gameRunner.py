@@ -36,40 +36,42 @@ class GameRunner():
 		
 		while True:
 
+			# Draw Phase
+
 			draw = self.agents[cur_player].getDrawAction()
 
-			if self.game.applyDrawAction(cur_player, draw) == False:
+			success = self.game.applyDrawAction(cur_player, draw)
+			if not success:
 				return False
 
-			# update agent with new game info
 			self.updateAgentWithGameState(self, cur_player)
 
+
+			# Meld Phase
 
 			meld = self.agents[cur_player].getMeldActions()
 
 			# verify meld is vaild
-
 			# make the meld action happen
 
-			self.agents[cur_player].getDiscardAction() 
+			# Discard Phase
 
-			# verify discard is vaild
+			discard = self.agents[cur_player].getDiscardAction() 
 
-			# make the discard action happen
+			success = self.game.applyDiscardAction(discard)
+			if not success:
+				return False
 
-
-			# if self.game.player[cur_player].hand.size() == 0:
-				#self.winner = cur_player
-				#break
-
-			
 			self.updateAgentsWithGameState()
+
+			# Check for win condition
+
+			if self.game.player[cur_player].hand.size() == 0:
+				self.winner = cur_player
+				break
 
 			# let the next player go
 			cur_player = (cur_player + 1) % self.num_players
-
-			# temporary, to prevent infinite loop
-			break
 
 
 	def updateAgentWithGameState(self, agent_number):

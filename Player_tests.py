@@ -42,6 +42,33 @@ class PlayerTests(unittest.TestCase):
 		self.assertEqual(len(copy.hand), len(p.hand))
 		self.assertEqual(copy.hand[0], nc)
 
+	def test_discard_returns_false_if_card_is_not_in_hand(self):
+		p = Player()
+		c1 = Card(2,3)
+		c2 = Card(5,2)
+		c3 = Card(3,4)
+		nc = Card()
+
+		p.draw(c1)
+		p.draw(c2)
+
+		self.assertEqual(p.discard(c3), False)
+		self.assertEqual(p.discard(nc), False)
+		self.assertEqual(p.discard(None), False)
+		self.assertEqual(p.discard([]), False)
+		self.assertEqual(len(p.hand), 2)
+
+	def test_discard_returns_true_and_remvoves_card_if_card_is_not_in_hand(self):
+		p = Player()
+		c1 = Card(2,3)
+
+		p.draw(c1)
+
+		self.assertEqual(p.discard(c1), True)
+		self.assertEqual(len(p.hand), 0)
+
+
+
 if __name__ == '__main__':
 	unittest.main()
 
