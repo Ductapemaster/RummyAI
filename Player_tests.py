@@ -2,7 +2,7 @@ import unittest
 
 from card import *
 
-class CardTests(unittest.TestCase):
+class PlayerTests(unittest.TestCase):
 
 	def setUp(self):
 		pass

@@ -1,9 +1,8 @@
 import unittest
 
 from deck import *
-from card import *
 
-class CardTests(unittest.TestCase):
+class DeckTests(unittest.TestCase):
 
 	def setUp(self):
 		pass

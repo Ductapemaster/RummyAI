@@ -2,7 +2,7 @@ import unittest
 
 from gameRunner import *
 
-class CardTests(unittest.TestCase):
+class GameRunnerTests(unittest.TestCase):
 
 	def setUp(self):
 		pass

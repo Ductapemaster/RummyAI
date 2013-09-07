@@ -2,7 +2,7 @@ import unittest
 
 from cardCollection import *
 
-class CardTests(unittest.TestCase):
+class CardCollectionTests(unittest.TestCase):
 
 	def setUp(self):
 		pass
