@@ -26,6 +26,7 @@ class DeckTests(unittest.TestCase):
 		d.shuffle()
 		top_card = d.cards[0]
 		self.assertEqual(d.getTopCard(), top_card)
+		self.assertEqual(d.cardsLeft(), 51)
 
 if __name__ == '__main__':
 	unittest.main()
