@@ -1,19 +1,23 @@
 import unittest
 
-from card import *
+from game import *
 
-class CardTests(unittest.TestCase):
+class GameTests(unittest.TestCase):
 
-	def setUp(self):
-		pass
+    def setUp(self):
+        pass
 
-	def test_constructor_works_as_expected(self):
-		rank = 1
-		suit = 2
-		c = Card(rank, suit)
-		self.assertEqual(c.rank, rank)
-		self.assertEqual(c.suit, suit)
+    def test_constructor_works_as_expected(self):
+        numPlayers = 3
+        g = Game(numPlayers)
+        self.assertEqual(len(g.players), numPlayers)
+
+    def test_dealHands_works_as_expected(self):
+        numPlayers = 3
+        numCards = 7
+        g = Game(numPlayers)
+        self.assertEqual(len(g.deck.deck), 52-(numPlayers*numCards)-1)
 
 if __name__ == '__main__':
-	unittest.main()
+    unittest.main()
 

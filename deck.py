@@ -18,12 +18,6 @@ class Deck:
 	
 	def shuffle(self):
 		random.shuffle(self.deck)
-		
-	# Take in an array of players and deal them all hands with the specified number of cards
-	def dealHands(self, num, playerList):
-		for i in range(num):
-			for player in playerList:
-				player.hand.append(self.deck.pop())
 	
 	# Pop off the top card of the deck and return it
 	def getTopCard(self):
