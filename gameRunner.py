@@ -1,5 +1,5 @@
-from IAgent import IAgent
-from Game import *
+from iAgent import *
+from game import *
 
 class GameRunner():
 

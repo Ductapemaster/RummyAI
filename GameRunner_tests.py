@@ -1,6 +1,6 @@
 import unittest
 
-from GameRunner import *
+from gameRunner import *
 
 class CardTests(unittest.TestCase):
 

@@ -1,7 +1,6 @@
 import unittest
 
-import Card
-from CardCollection import *
+from cardCollection import *
 
 class CardTests(unittest.TestCase):
 

@@ -1,5 +1,5 @@
-from Player import *
-from Deck import *
+from player import *
+from deck import *
 
 class Game:
 	def __init__(self, numPlayers):

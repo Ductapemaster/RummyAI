@@ -1,4 +1,4 @@
-import Card
+from card import * 
 
 class CardCollection:
 	def __init__(self):
