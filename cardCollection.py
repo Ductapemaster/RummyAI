@@ -15,15 +15,16 @@ class CardCollection:
 		self.cards.append(new_card)
 		
 	def removeCard(self, card_to_remove):
-		for idx in range(len(cards)):
-			if cards[idx] == card_to_remove:
-				c = cards[idx]
-				cards.remove(idx)
-				return c
-		return False
+		try:
+			return self.cards.pop(self.cards.index(card_to_remove))
+		except:
+			return False
 				
 	def popCard(self, idx=0):
-		return self.cards.pop(idx)
+		try:
+			return self.cards.pop(idx)
+		except:
+			return False
 		
 	def isEmpty(self):
 		if len(self.cards) == 0:

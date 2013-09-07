@@ -10,5 +10,9 @@ class Card:
 		letter = letters.get(self.rank, str(self.rank))
 		return "<Card %s %s>" % (letter, self.suit)
 		
-	
+	def __eq__(self, other):
+		if isinstance(other, self.__class__):
+			return self.suit == other.suit and self.rank == other.rank
+		else:
+			return False
 
