@@ -16,7 +16,7 @@ class GameTests(unittest.TestCase):
         numPlayers = 3
         numCards = 7
         g = Game(numPlayers)
-        self.assertEqual(len(g.deck.deck), 52-(numPlayers*numCards)-1)
+        self.assertEqual(g.deck.numCards(), 52-(numPlayers*numCards)-1)
 
 if __name__ == '__main__':
     unittest.main()

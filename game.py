@@ -16,7 +16,7 @@ class Game:
             self.players.append(Player())
 
         self.dealHands(7)
-        self.drawPile.append(self.deck.getTopCard())
+        self.drawPile.append(self.deck.popCard())
 
     def numPlayers(self):
         return len(self.players)
@@ -25,4 +25,4 @@ class Game:
     def dealHands(self, numCards):
         for i in range(numCards):
             for player in self.players:
-                player.hand.append(self.deck.getTopCard())
+                player.hand.append(self.deck.popCard())
