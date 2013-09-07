@@ -1,3 +1,6 @@
+from Player import *
+from Deck import *
+
 class Game:
 	def __init__(self, numPlayers):
 		# Instantiate new deck and shuffle it
@@ -8,8 +11,12 @@ class Game:
 		self.players = []
 		self.drawPile = []
 		
+		
 		for num in range(numPlayers):
-			self.players.append(RummyPlayer())
+			self.players.append(Player())
 
 		self.deck.dealHands(7, self.players)
 		self.drawPile.append(self.deck.getTopCard())
+
+	def numPlayers(self):
+		return len(self.players)
