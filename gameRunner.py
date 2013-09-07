@@ -38,9 +38,12 @@ class GameRunner():
 
 			draw = self.agents[cur_player].getDrawAction()
 
-			# verify draw is vaild
+			if self.game.applyDrawAction(cur_player, draw) == False:
+				return False
 
-			# make the draw action happen
+			# update agent with new game info
+			self.updateAgentWithGameState(self, cur_player)
+
 
 			meld = self.agents[cur_player].getMeldActions()
 
@@ -69,12 +72,11 @@ class GameRunner():
 			break
 
 
+	def updateAgentWithGameState(self, agent_number):
+			game_copy = self.game.getSanitizedCopy(agent_number)
+			self.agents[agent_number].updateGameState(game_copy)
 			
 	def updateAgentsWithGameState(self):
-
 		for i in range(self.num_players):
-			players = self.game.getPlayersCopyForAgent(i)
-			discard_pile = self.game.getDiscardPileCopy()
-
-			self.agents[i].updateGameState(players, discard_pile)
+			self.updateAgentWithGameState(i)
 

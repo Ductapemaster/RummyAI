@@ -21,19 +21,24 @@ class GameTests(unittest.TestCase):
 		self.assertEqual(len(g.discard_pile), 1)
 
 
-	def test_getPlayersCopyForAgent_returns_null_cards_for_appropriate_players(self):
+	def test_getSanitizedCopy_hides_cards(self):
 		numPlayers = 3
 		g = Game(numPlayers)
 
 		agent_num = 2
-		pc = g.getPlayersCopyForAgent(agent_num)
+		copy = g.getSanitizedCopy(agent_num)
 		
 		for i in range(numPlayers):
-			for c in range(len(pc[i].hand)):
+			for c in range(len(copy.players[i].hand)):
 				if i != agent_num:
-					self.assertEqual(pc[i].hand[c], Card())
+					self.assertEqual(copy.players[i].hand[c], Card())
 				else:
-					self.assertEqual(pc[i].hand[c], g.players[i].hand[c])
+					self.assertEqual(copy.players[i].hand[c], g.players[i].hand[c])
+
+		for c in copy.draw_pile:
+			self.assertEquals(c, Card())
+
+
 
 if __name__ == '__main__':
 	unittest.main()

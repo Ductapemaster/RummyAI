@@ -4,7 +4,7 @@ class IAgent():
 	def setPlayerNumber(self, player_number):
 		self.player_number = player_number
 
-	def updateGameState(self, players, discard_pile):
+	def updateGameState(self, game):
 		pass
 
 	def getDrawAction(self):

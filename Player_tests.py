@@ -12,11 +12,11 @@ class PlayerTests(unittest.TestCase):
 		self.assertEqual(p.hand, [])
 		self.assertEqual(p.board, [])
 
-	def test_addCardToHand_adds_the_card_its_hand(self):
+	def test_draw_adds_the_card_its_hand(self):
 		p = Player()
 		c = Card(2,3)
 
-		p.addCardToHand(c)
+		p.draw(c)
 
 		self.assertEqual(len(p.hand), 1)
 		self.assertEqual(p.hand[0], c)
@@ -25,7 +25,7 @@ class PlayerTests(unittest.TestCase):
 		p = Player()
 		c = Card(2,3)
 
-		p.addCardToHand(c)
+		p.draw(c)
 
 		copy = p.getCopy()
 		self.assertEqual(len(copy.hand), len(p.hand))
@@ -36,7 +36,7 @@ class PlayerTests(unittest.TestCase):
 		c = Card(2,3)
 		nc = Card()
 
-		p.addCardToHand(c)
+		p.draw(c)
 
 		copy = p.getCopyNullHand()
 		self.assertEqual(len(copy.hand), len(p.hand))

@@ -42,16 +42,37 @@ class Game:
 	def numPlayers(self):
 		return len(self.players)
 
-	def getPlayersCopyForAgent(self, agent_num):
-		copy = []
+	def getSanitizedCopy(self, agent_num):
+		copy = Game(len(self.players))
+		copy.players = []
 		for i in range(len(self.players)):
 			if i != agent_num:
-				copy.append(self.players[i].getCopyNullHand())
+				copy.players.append(self.players[i].getCopyNullHand())
 			else:
-				copy.append(self.players[i].getCopy())
+				copy.players.append(self.players[i].getCopy())
+		copy.discard_pile = self.discard_pile.copy()
+		copy.draw_pile = [Card()]*self.draw_pile.cardsLeft()
 		return copy
 
-	def getDiscardPileCopy(self):
-		return self.discard_pile.copy()
+	def applyDrawAction(self, player_num, action):
+		if player_num < 0:
+			return False
+
+		if action == 0:
+			c = self.draw_pile.getTopCard()
+			self.player[player_num].draw(c)
+		else:
+			if action > len(self.discard_pile):
+				return False
+
+			for i in range(action):
+				c = self.discard_pile.pop()
+				self.player[player_num].draw(c)
+
+		return True
+			
+			
+			
+
 
 
