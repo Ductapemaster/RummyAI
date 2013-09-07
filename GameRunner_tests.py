@@ -1,6 +1,6 @@
 import unittest
 
-from Card import *
+from GameRunner import *
 
 class CardTests(unittest.TestCase):
 
@@ -8,11 +8,7 @@ class CardTests(unittest.TestCase):
 		pass
 
 	def test_constructor_works_as_expected(self):
-		rank = 1
-		suit = 2
-		c = Card(rank, suit)
-		self.assertEqual(c.rank, rank)
-		self.assertEqual(c.suit, suit)
+		gr = GameRunner()
 
 if __name__ == '__main__':
 	unittest.main()
