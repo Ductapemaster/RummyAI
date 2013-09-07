@@ -13,13 +13,19 @@ class DeckTests(unittest.TestCase):
 			for rank in range (1, 14):
 				test_deck.append(Card(rank, suit))
 		d = Deck()
-		self.assertEqual(d.numCards(), 52)
+		self.assertEqual(d.cardsLeft(), 52)
 		self.assertEqual(d.cards, test_deck)
 		
 	def test_shuffle(self):
 		d = Deck()
 		d.shuffle()
-		self.assertEqual(d.numCards(), 52)
+		self.assertEqual(d.cardsLeft(), 52)
+		
+	def test_get_top_card(self):
+		d = Deck()
+		d.shuffle()
+		top_card = d.cards[0]
+		self.assertEqual(d.getTopCard(), top_card)
 
 if __name__ == '__main__':
 	unittest.main()
