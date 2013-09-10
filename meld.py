@@ -15,7 +15,12 @@ class Meld:
 		# 1: set
 		# 2: run
 		self.meld_type = 0
-		
+	
+	def sort(self):
+		self.cards = sorted(cards, key=attrgetter('suit', 'rank'))
+		# if isValidMeld(): break
+		# 	
+	
 	def isSameRank(self):
 		same_rank = True
 		for c in self.cards:

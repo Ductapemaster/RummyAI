@@ -108,7 +108,30 @@ class MeldTests(unittest.TestCase):
 		test_card_2 = [Card(13,2)]
 		m = Meld(test_card_1)
 		self.assertEqual(m.canCombineWith(Meld(test_card_2)), True)
+	
+	def test_meld_with_ace_low_run(self):
+		test_cards = [Card(1,2), Card(2,2), Card(3,2)] # <A 2 3> of Hearts
+		test_value = 25
+		m = Meld(test_cards)
+		self.assertEqual(m.getMeldValue(), test_value)
+		self.assertEqual(m.isValidMeld(), True)
+		self.assertEqual(m.isIndependentMeld(), True)
 		
+	def test_meld_with_ace_high_run(self):
+		test_cards = [Card(12,2), Card(13,2), Card(1,2)] # <Q K A> of Hearts
+		test_value = 35
+		m = Meld(test_cards)
+		self.assertEqual(m.getMeldValue(), test_value)
+		self.assertEqual(m.isValidMeld(), True)
+		self.assertEqual(m.isIndependentMeld(), True)
+		
+	def test_melt_with_wraparound_meld(self):
+		test_cards = [Card(13,2), Card(1,2), Card(2,2)] # <K A 2> of Hearts
+		test_value = 30
+		m = Meld(test_cards)
+		self.assertEqual(m.getMeldValue(), test_value)
+		self.assertEqual(m.isValidMeld(), True)
+		self.assertEqual(m.isIndependentMeld(), True)
 
 if __name__ == '__main__':
-	unittest.main()
+	unittest.main()  
