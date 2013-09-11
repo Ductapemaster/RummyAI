@@ -125,13 +125,32 @@ class MeldTests(unittest.TestCase):
 		self.assertEqual(m.isValidMeld(), True)
 		self.assertEqual(m.isIndependentMeld(), True)
 		
-	def test_melt_with_wraparound_meld(self):
+	def test_meld_with_wraparound_meld(self):
 		test_cards = [Card(13,2), Card(1,2), Card(2,2)] # <K A 2> of Hearts
 		test_value = 30
 		m = Meld(test_cards)
 		self.assertEqual(m.getMeldValue(), test_value)
+		self.assertEqual(m.isValidMeld(), False)
+		self.assertEqual(m.isIndependentMeld(), False)
+		
+	def test_combining_valid_ace_low_straight_with_inconsecutive_valid_straight(self):
+		test_cards_1 = [Card(1,2), Card(2,2), Card(3,2)] # <A 2 3> of Hearts
+		test_cards_2 = [Card(4,2), Card(6,2)]
+		m = Meld(test_cards_2)
+		self.assertEqual(m.canCombineWith(Meld(test_cards_1)), False)
+		self.assertEqual(m.isValidMeld(), False)
+		self.assertEqual(m.isIndependentMeld(), False)
+		
+	def test_combining_JQK_straight_with_Ace(self):
+		test_cards_1 = [Card(11,2), Card(12,2), Card(13,2)] # <A 2 3> of Hearts
+		test_cards_2 = [Card(1,2)]
+		m = Meld(test_cards_2)
+		self.assertEqual(m.canCombineWith(Meld(test_cards_1)), True)
 		self.assertEqual(m.isValidMeld(), True)
-		self.assertEqual(m.isIndependentMeld(), True)
+		self.assertEqual(m.isIndependentMeld(), False)
+		
+	def test_combining_QKA_straight_with_ten(self):
+		pass
 
 if __name__ == '__main__':
 	unittest.main()  
