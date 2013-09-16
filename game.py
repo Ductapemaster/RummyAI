@@ -57,12 +57,14 @@ class Game:
 		return copy
 
 	def applyDrawAction(self, player_num, action):
-		if player_num < 0 or player_num >= self.numPlayers:
+		if player_num < 0 or player_num >= self.numPlayers():
 			return False
+
+		self.last_draw_action = action
 
 		if action == 0:
 			c = self.draw_pile.getTopCard()
-			self.player[player_num].draw(c)
+			self.players[player_num].draw(c)
 		else:
 			if action > len(self.discard_pile):
 				return False
@@ -70,7 +72,7 @@ class Game:
 			for i in range(action):
 				c = self.discard_pile.pop()
 				self.last_card_removed_from_discard_pile = c
-				self.player[player_num].draw(c)
+				self.players[player_num].draw(c)
 
 		return True
 
@@ -91,18 +93,28 @@ class Game:
 		for m in melds:
 			can_meld = False
 
+			for c in m.cards:
+				success = self.players[player_num].discard()
+				if not success:
+					return False
+
 			if m.isIndependentMeld():
+				#m.meldType = mc.determineMeldType()
+				for c in m.cards:
+					success = self.players[player_num].discard()
+					if not success:
+						return False
 				self.players[player_num].board.append(m)
 				can_meld = True
 				continue
 
 			for p in self.players:
 				for om in p.board:
-					# TODO: do meld type checking here
 					if m.canCombineWith(om):
-						self.players[player_num].board.append(m)
-						can_meld = True
-						break
+						if m.meld_type == om.meld_type:
+							self.players[player_num].board.append(m)
+							can_meld = True
+							break
 				if can_meld:
 					break
 			if can_meld:
@@ -114,10 +126,10 @@ class Game:
 		return True
 			
 	def applyDiscardAction(self, player_num, card):
-		if player_num < 0 or player_num >= self.numPlayers:
+		if player_num < 0 or player_num >= self.numPlayers():
 			return False
 
-		if self.player[player_num].discard(card) == False:
+		if self.players[player_num].discard(card) == False:
 			return False
 
 		self.discard_pile.append(card)

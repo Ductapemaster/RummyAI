@@ -1,4 +1,5 @@
 import random
+import copy
 from card import *
 
 # Inherits from CardCollection class, adds shuffle capability
@@ -17,4 +18,7 @@ class Deck:
 		
 	def getTopCard(self):
 		return self.cards.pop(0)
+
+	def peekTopCard(self):
+		return copy.copy(self.cards[0])
 
