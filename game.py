@@ -1,6 +1,7 @@
 import copy
 from player import *
 from deck import *
+from meld import *
 
 class Game:
 	def __init__(self, numPlayers):
@@ -94,26 +95,32 @@ class Game:
 		for m in melds:
 			can_meld = False
 
+			meld_cards = []
+			# verify that the meld is contained in the player's hand
 			for c in m.cards:
-				success = self.players[player_num].discard()
+				success, mc = self.players[player_num].discard()
+				meld_cards.append(mc)
 				if not success:
 					return False
 
-			if m.isIndependentMeld():
+			# create a meld with the cards
+			actual_meld = Meld(meld_cards)
+			if (actual_meld.length == 1):
+				actual_meld.meld_type = m.meld_type
+
+			# if the play is independent, play the meld
+			if actual_meld.isIndependentMeld():
 				#m.meldType = mc.determineMeldType()
-				for c in m.cards:
-					success = self.players[player_num].discard()
-					if not success:
-						return False
-				self.players[player_num].board.append(m)
+				self.players[player_num].board.append(actual_meld)
 				can_meld = True
 				continue
 
+			# otherwise, see if it can be combined with any other meld
 			for p in self.players:
-				for om in p.board:
-					if m.canCombineWith(om):
-						if m.meld_type == om.meld_type:
-							self.players[player_num].board.append(m)
+				for other_meld in p.board:
+					if actual_meld.canCombineWith(other_meld):
+						if m.meld_type == other_meld.meld_type:
+							self.players[player_num].board.append(actual_meld)
 							can_meld = True
 							break
 				if can_meld:
