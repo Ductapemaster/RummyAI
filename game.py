@@ -119,18 +119,15 @@ class Game:
 			for p in self.players:
 				for other_meld in p.board:
 					if actual_meld.canCombineWith(other_meld):
-						if m.meld_type == other_meld.meld_type:
-							self.players[player_num].board.append(actual_meld)
-							can_meld = True
-							break
-				if can_meld:
+						self.players[player_num].board.append(actual_meld)
+						can_meld = True
+						break
+				if can_meld:# exit player loop because we already melded this meld
 					break
-			if can_meld:
-				continue	
-
-			return False
+			if not can_meld:# if meld was not played, indicate failure 
+				return False
 		
-
+		# all melds were melded
 		return True
 			
 	def applyDiscardAction(self, player_num, card):
