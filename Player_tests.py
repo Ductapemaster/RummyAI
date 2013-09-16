@@ -52,10 +52,11 @@ class PlayerTests(unittest.TestCase):
 		p.draw(c1)
 		p.draw(c2)
 
-		self.assertEqual(p.discard(c3), False)
-		self.assertEqual(p.discard(nc), False)
-		self.assertEqual(p.discard(None), False)
-		self.assertEqual(p.discard([]), False)
+		self.assertEqual(p.discard(c3)[0], False)
+		self.assertEqual(p.discard(c3)[1], nc)
+		self.assertEqual(p.discard(nc)[0], False)
+		self.assertEqual(p.discard(None)[0], False)
+		self.assertEqual(p.discard([])[0], False)
 		self.assertEqual(len(p.hand), 2)
 
 	def test_discard_returns_true_and_remvoves_card_if_card_is_not_in_hand(self):
@@ -64,7 +65,9 @@ class PlayerTests(unittest.TestCase):
 
 		p.draw(c1)
 
-		self.assertEqual(p.discard(c1), True)
+		success, c = p.discard(c1) 
+		self.assertEqual(success, True)
+		self.assertEqual(c, c1)
 		self.assertEqual(len(p.hand), 0)
 
 

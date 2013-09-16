@@ -1,3 +1,4 @@
+import copy
 from player import *
 from deck import *
 
@@ -71,7 +72,7 @@ class Game:
 
 			for i in range(action):
 				c = self.discard_pile.pop()
-				self.last_card_removed_from_discard_pile = c
+				self.last_card_removed_from_discard_pile = copy.copy(c)
 				self.players[player_num].draw(c)
 
 		return True
@@ -129,10 +130,11 @@ class Game:
 		if player_num < 0 or player_num >= self.numPlayers():
 			return False
 
-		if self.players[player_num].discard(card) == False:
+		success, c = self.players[player_num].discard(card)
+		if success == False:
 			return False
 
-		self.discard_pile.append(card)
+		self.discard_pile.append(c)
 		return True
 			
 			

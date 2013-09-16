@@ -7,10 +7,11 @@ class Player:
 	
 	def discard(self, card):
 		try:
-			self.hand.remove(card)
+			i = self.hand.index(card)
+			#self.hand.remove(card)
 		except ValueError:
-			return False
-		return True
+			return [False, Card()]
+		return [True, self.hand.pop(i)]
 
 	def draw(self, card):
 		self.hand.append(card)
