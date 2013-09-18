@@ -98,7 +98,7 @@ class Game:
 			meld_cards = []
 			# verify that the meld is contained in the player's hand
 			for c in m.cards:
-				success, mc = self.players[player_num].discard()
+				success, mc = self.players[player_num].discard(c)
 				meld_cards.append(mc)
 				if not success:
 					return False
@@ -108,9 +108,12 @@ class Game:
 			if (actual_meld.length == 1):
 				actual_meld.meld_type = m.meld_type
 
+			if not actual_meld.valid:
+				return False
+
+
 			# if the play is independent, play the meld
 			if actual_meld.isIndependentMeld():
-				#m.meldType = mc.determineMeldType()
 				self.players[player_num].board.append(actual_meld)
 				can_meld = True
 				continue
@@ -122,7 +125,7 @@ class Game:
 						self.players[player_num].board.append(actual_meld)
 						can_meld = True
 						break
-				if can_meld:# exit player loop because we already melded this meld
+				if can_meld:# check next meld 
 					break
 			if not can_meld:# if meld was not played, indicate failure 
 				return False
