@@ -22,3 +22,11 @@ class Deck:
 	def peekTopCard(self):
 		return copy.copy(self.cards[0])
 
+
+class NullDeck():
+	def __init__(self, cards_left=0):
+		self.cards = []
+		self.cards_left= cards_left;
+
+	def cardsLeft(self):
+		return self.cards_left

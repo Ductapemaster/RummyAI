@@ -55,7 +55,7 @@ class Game:
 			else:
 				copy.players.append(self.players[i].getCopy())
 		copy.discard_pile = self.discard_pile.copy()
-		copy.draw_pile = [Card()]*self.draw_pile.cardsLeft()
+		copy.draw_pile = NullDeck(self.draw_pile.cardsLeft())
 		return copy
 
 	def applyDrawAction(self, player_num, action):

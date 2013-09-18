@@ -1,3 +1,4 @@
+from iAgent import *
 
 class HumanAgent(IAgent):
 	
@@ -11,23 +12,22 @@ class HumanAgent(IAgent):
 		self.sanitized_game = sanitized_game
 		
 	def getDrawAction(self):
-		print "It is Player %d's turn. Current Game State: ", self.player_number
-		print sanitized_game
-		print "\nActions:\n0: Draw top card off of draw pile\nN: Pickup N cards from discard pile"		
+		print ("It is Player %d's turn. Current Game State: " % self.player_number)
+		print (self.sanitized_game)
+		print ("\nActions:\n0: Draw top card off of draw pile\nN: Pickup N cards from discard pile")
 		
-		while(true):
-			draw_action_str = raw_input("What would you like to do? ")
-			if (int(draw_action_str) > 0 and int(draw_action_str) <= len(sanitized_game.draw_pile)):
+		draw_action = -1 # This will be set by the user 
+		while(True):
+			draw_action_str = input("What would you like to do? ")
+			draw_action = int(draw_action_str)
+			if (int(draw_action) >= 0 and int(draw_action) <= len(self.sanitized_game.discard_pile)):
 				break
-			print "Invalid choice entered, try again."
+			print ("Invalid choice entered, try again.")
 		
-		draw_action = int(draw_action_str)
 		if draw_action == 0:
-			print "Drawing top card off of draw pile"
-		elif draw_action == 1:
-			print "Drawing the %s off of the discard pile", sanitized_game.discard_pile[len(sanitized_game.discard_pile)-1]
+			print ("Drawing top card off of draw pile")
 		else:
-			print "Drawing %d cards off of the discard pile"
+			print ("Drawing %d top card(s) off of the discard pile" % draw_action)
 		return draw_action
 		
 	def getMeldAction(self):

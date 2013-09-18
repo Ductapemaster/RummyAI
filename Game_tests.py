@@ -35,8 +35,8 @@ class GameTests(unittest.TestCase):
 				else:
 					self.assertEqual(copy.players[i].hand[c], g.players[i].hand[c])
 
-		for c in copy.draw_pile:
-			self.assertEquals(c, Card())
+		self.assertEquals(len(copy.draw_pile.cards), 0)
+		self.assertEquals(copy.draw_pile.cardsLeft(), g.draw_pile.cardsLeft())
 
 
 	def test_applyDrawAction_draws_off_of_the_draw_pile(self):
