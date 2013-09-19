@@ -1,6 +1,7 @@
 import random
 
 from iAgent import *
+from humanAgent import *
 from game import *
 
 
@@ -9,7 +10,7 @@ class GameRunner():
 	def __init__(self):
 		pass
 
-	def createNewGame(self, agents, starting_player=1):
+	def createNewGame(self, agents, starting_player=0):
 		self.num_players = len(agents)
 
 		if self.num_players < 2:
@@ -44,7 +45,7 @@ class GameRunner():
 			if not success:
 				return False
 
-			self.updateAgentWithGameState(self, cur_player)
+			self.updateAgentWithGameState(cur_player)
 
 
 			# Meld Phase
@@ -82,4 +83,18 @@ class GameRunner():
 	def updateAgentsWithGameState(self):
 		for i in range(self.num_players):
 			self.updateAgentWithGameState(i)
+
+	def runHumanVsHumanGame(self, num_humans):
+
+		hu_ags = []
+		for i in range(num_humans):
+			hu_ags.append(HumanAgent())
+
+		self.createNewGame(hu_ags)
+
+		self.playGame()
+
+
+
+
 
