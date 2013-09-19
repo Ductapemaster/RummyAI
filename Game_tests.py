@@ -99,12 +99,128 @@ class GameTests(unittest.TestCase):
 
 		self.assertEqual(success, False)
 
+
 	def test_applyMeldAction_does_nothing_with_empty_list(self):
 		numPlayers = 3
 		g = Game(numPlayers)
 
 		self.assertEqual(g.applyMeldAction(1,[]), True)
 		
+	def test_applyMeldAction_melds_independent_meld_set(self):
+		numPlayers = 3
+		g = Game(numPlayers)
+
+		#force player 1's hand to have the cards we want
+		valid_meld = [Card(3,2), Card(3,3), Card(3,4)]
+		g.players[1].hand = [Card(6,2), Card(9,3)]
+		g.players[1].hand.extend(valid_meld)
+		
+		m = Meld(valid_meld)
+
+		self.assertEqual(g.applyMeldAction(1,[m]), True)
+
+		self.assertEquals(len(g.players[1].hand), 2)
+		self.assertEquals(len(g.players[1].board), 1)
+
+	def test_applyMeldAction_melds_independent_meld_run(self):
+		numPlayers = 3
+		g = Game(numPlayers)
+
+		#force player 1's hand to have the cards we want
+		valid_meld = [Card(3,2), Card(4,2), Card(5,2)]
+		g.players[1].hand = [Card(7,2), Card(9,3)]
+		g.players[1].hand.extend(valid_meld)
+		
+		m = Meld(valid_meld)
+
+		self.assertEqual(g.applyMeldAction(1,[m]), True)
+
+		self.assertEquals(len(g.players[1].hand), 2)
+		self.assertEquals(len(g.players[1].board), 1)
+
+	def test_applyMeldAction_returns_false_if_cards_not_in_hand(self):
+		numPlayers = 3
+		g = Game(numPlayers)
+
+		#force player 1's hand to have the cards we want
+		valid_meld = [Card(3,2), Card(3,3), Card(3,4)]
+		g.players[1].hand = [Card(3,2), Card(6,2), Card(9,3), Card(7,3)]
+		
+		m = Meld(valid_meld)
+
+		self.assertEqual(g.applyMeldAction(1,[m]), False)
+
+	def test_applyMeldAction_returns_false_if_invalid_meld(self):
+		numPlayers = 3
+		g = Game(numPlayers)
+
+		#force player 1's hand to have the cards we want
+		invalid_meld = [Card(3,2), Card(6,3), Card(3,4)]
+		g.players[1].hand = [Card(6,2), Card(9,3)]
+		g.players[1].hand.extend(invalid_meld)
+		
+		m = Meld(invalid_meld)
+
+		self.assertEqual(g.applyMeldAction(1,[m]), False)
+
+	def test_applyMeldAction_melds_dependent_meld_own_board(self):
+		numPlayers = 3
+		g = Game(numPlayers)
+
+		#force player 1's hand to have the cards we want
+		dependent_meld_cards = [Card(3,2)]
+		g.players[1].hand = [Card(6,2), Card(9,3)]
+		g.players[1].hand.extend(dependent_meld_cards)
+		
+		#force player 1's board to have the melds we want
+		valid_meld_cards = [Card(3,2), Card(3,3), Card(3,4)]
+		vm = Meld(valid_meld_cards)
+		g.players[1].board = [vm]
+
+		m = Meld(dependent_meld_cards)
+		m.setMeldTypeManual(1)
+
+		self.assertEqual(g.applyMeldAction(1,[m]), True)
+
+		self.assertEquals(len(g.players[1].hand), 2)
+		self.assertEquals(len(g.players[1].board), 2)
+
+	def test_applyMeldAction_melds_dependent_meld_other_board(self):
+		numPlayers = 3
+		g = Game(numPlayers)
+
+		#force player 1's hand to have the cards we want
+		dependent_meld_cards = [Card(3,2), Card(4,2)]
+		g.players[1].hand = [Card(6,4), Card(9,3)]
+		g.players[1].hand.extend(dependent_meld_cards)
+		
+		#force player 2's board to have the melds we want
+		valid_meld_cards = [Card(5,2), Card(6,2), Card(7,2)]
+		vm = Meld(valid_meld_cards)
+		g.players[2].board = [vm]
+
+		m = Meld(dependent_meld_cards)
+
+		self.assertEqual(g.applyMeldAction(1,[m]), True)
+
+		self.assertEquals(len(g.players[1].hand), 2)
+		self.assertEquals(len(g.players[1].board), 1)
+
+	def test_applyMeldAction_returns_false_if_last_picked_up_card_not_used(self):
+		numPlayers = 3
+		g = Game(numPlayers)
+		g.last_draw_action = 1
+		g.last_card_removed_from_discard_pile = Card(10,1)
+
+		#force player 1's hand to have the cards we want
+		valid_meld = [Card(3,2), Card(4,2), Card(5,2)]
+		g.players[1].hand = [Card(7,2), Card(9,3)]
+		g.players[1].hand.extend(valid_meld)
+		
+		m = Meld(valid_meld)
+
+		self.assertEqual(g.applyMeldAction(1,[m]), False)
+
 
 	def test_applyDiscardAction_returns_false_if_null_card(self):
 		numPlayers = 3
