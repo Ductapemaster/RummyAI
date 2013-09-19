@@ -44,7 +44,7 @@ class GameRunner():
 			if not success:
 				return False
 
-			self.updateAgentWithGameState(self, cur_player)
+			self.updateAgentWithGameState(cur_player)
 
 
 			# Meld Phase

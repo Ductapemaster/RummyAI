@@ -21,6 +21,12 @@ class Deck:
 
 	def peekTopCard(self):
 		return copy.copy(self.cards[0])
+		
+	def __repr__(self):
+		string = ""
+		for idx in range(0,52):
+			string += "%d: %s\n" %(idx + 1, self.cards[idx])
+		return string
 
 
 class NullDeck():
@@ -30,3 +36,9 @@ class NullDeck():
 
 	def cardsLeft(self):
 		return self.cards_left
+	
+	def __repr__(self):
+		string = ""
+		for idx in range(0,52):
+			string += "%d: %s\n" %(idx + 1, self.cards[idx])
+		return string

@@ -67,6 +67,12 @@ class Meld:
 		
 		#print ("meld type: %s" %(self.meld_type))
 		
+	def __repr__(self):
+		meld_str = ""
+		for card in self.cards:
+			meld_str += "%s" % card
+		return meld_str
+		
 	def sortCardsByRank(self):
 		self.cards = sorted(self.cards, key=attrgetter('suit', 'rank'))
 		
