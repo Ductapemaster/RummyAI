@@ -28,10 +28,9 @@ class Game:
 	def __repr__(self):
 		draw_pile_str = "Draw Pile: %d Cards Left\n\n" % (self.draw_pile.cardsLeft())
 
-		discard_pile_str = "Discard Pile:\n\t"
-		for c in self.discard_pile:
-			discard_pile_str += c.__repr__() + ", "
-		discard_pile_str += "\n"
+		discard_pile_str = "Discard Pile:\n"
+		for idx in range(len(self.discard_pile)):
+			discard_pile_str += '%d: %s\n' %((len(self.discard_pile) - idx), self.discard_pile[idx].__repr__())
 
 		player_str = ""
 		meld_type_dict = {1: "Run", 2: "Str"}
@@ -40,7 +39,7 @@ class Game:
 			player_str += "========================================\n\n"
 			player_str += "Board:\n"
 			for meld in self.players[p].board:
-				player_str += "%s: %s" %(meld_type_dict.get(meld.meld_type), meld)
+				player_str += "%s: %s\n" %(meld_type_dict.get(meld.meld_type), meld)
 			# Check for null card as first card, if its null, print the number of cards out
 			# Otherwise print the players hand via index
 			if(self.players[p].hand[0] == Card()):

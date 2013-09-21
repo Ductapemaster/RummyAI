@@ -1,6 +1,7 @@
 from iAgent import *
 from meld import *
 from operator import attrgetter
+import os
 
 class HumanAgent(IAgent):
 	
@@ -10,6 +11,9 @@ class HumanAgent(IAgent):
 		self.discard_pile = []
 		
 	def getDrawAction(self):
+
+		os.system('cls' if os.name=='nt' else 'clear')		
+
 		print ("It is Player %d's turn. Current Game State:\n" % (self.player_number + 1))
 		self.game.players[self.player_number].hand = sorted(self.game.players[self.player_number].hand, key=attrgetter( 'alt_rank', 'suit'))
 		print (self.game)
@@ -39,6 +43,8 @@ class HumanAgent(IAgent):
 		return draw_action
 		
 	def getMeldActions(self):
+
+		os.system('cls' if os.name=='nt' else 'clear')		
 
 		print ("Player %d, do you want to meld any cards?  Current Game State:\n" % self.player_number)
 		self.game.players[self.player_number].hand = sorted(self.game.players[self.player_number].hand, key=attrgetter( 'alt_rank', 'suit'))
@@ -94,6 +100,9 @@ class HumanAgent(IAgent):
 		return meld_list	
 		
 	def getDiscardAction(self):
+
+		os.system('cls' if os.name=='nt' else 'clear')		
+
 		print ("Current Game State:")
 		self.game.players[self.player_number].hand = sorted(self.game.players[self.player_number].hand, key=attrgetter( 'alt_rank', 'suit'))
 		print (self.game)
