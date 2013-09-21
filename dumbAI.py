@@ -11,5 +11,5 @@ class DumbAI(IAgent):
 		return []
 
 	def getDiscardAction(self):
-		rand_index = random.randint(0, len(self.game.players[self.player_number].hand))
+		rand_index = random.randint(0, len(self.game.players[self.player_number].hand) - 1)
 		return self.game.players[self.player_number].hand[rand_index]
