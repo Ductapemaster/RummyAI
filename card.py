@@ -3,7 +3,7 @@
 class Card:
 
 	# Define face cards
-	face_cards = {-1: 'NUL', 1:'AL ', 10: '10 ', 11:'J  ', 12:'Q  ', 13:'K  ', 14:'AH ', 20:'JKR'}
+	face_cards = {-1: 'NL', 1:'AL', 10: '10', 11:'J ', 12:'Q ', 13:'K ', 14:'AH', 20:'JK'}
 	# Define suits, 0 is a null suit
 	suits = {-1: 'N', 1: 'S', 2: 'H', 3: 'C', 4: 'D'}
 
@@ -16,8 +16,8 @@ class Card:
 		
 	def __repr__(self, debug=False):
 		# Return face card rank if in dict, otherwise return string of the rank (2-9)
-		readable_rank = self.face_cards.get(self.rank, str(self.rank) + '  ')
-		readable_alt_rank = self.face_cards.get(self.alt_rank, str(self.alt_rank) + '  ')
+		readable_rank = self.face_cards.get(self.rank, str(self.rank) + ' ')
+		readable_alt_rank = self.face_cards.get(self.alt_rank, str(self.alt_rank) + ' ')
 		readable_suit = self.suits.get(self.suit)
 		if(debug): 
 			return "<%s %s %s>" % (readable_rank, readable_alt_rank, readable_suit)
