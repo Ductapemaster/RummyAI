@@ -22,10 +22,19 @@ class HumanAgent(IAgent):
 		draw_action = -1 # This will be set by the user 
 		while(True):
 			draw_action_str = input("What would you like to do? ")
-			draw_action = int(draw_action_str)
+			
+			if (len(draw_action_str) == 0):
+				print("Invalid choice!\n")
+				continue
+
+			try:
+				draw_action = int(draw_action_str)
+			except:
+				print("Must input an integer!\n")
+
 			if ((draw_action >= 0) and (draw_action <= len(self.sanitized_game.discard_pile))):
 				break
-			print ("Invalid choice entered, try again.")
+			print ("Invalid choice entered, try again\n")
 		
 		if draw_action == 0:
 			print ("\nDrawing top card off of draw pile")
@@ -38,17 +47,21 @@ class HumanAgent(IAgent):
 		print ("Player %d, do you want to meld any cards?  Current Game State:\n" % self.player_number)
 		self.sanitized_game.players[self.player_number].hand = sorted(self.sanitized_game.players[self.player_number].hand, key=attrgetter( 'alt_rank', 'suit'))
 		print (self.sanitized_game)
-		print ("Actions:\n\'M <Card 1 Idx> <Card 2 Idx> ... <Card N Idx>\': Create meld of N cards\n\'E\': End meld phase")
+		print ("Actions:\n\'M <Idx 1> <Idx 2> ... <Idx N>\': Create meld of N cards\n\'E\': End meld phase")
 		
 		meld_list = []
 		while(True):
 			meld_action_str = input("What would you like to do?")
+			
+			if (len(meld_action_str) == 0):
+				print("Invalid choice!\n")
+				continue
 
-			if (meld_action_str[0] == 'M'):
+			elif (meld_action_str[0] == 'M'):
 				
 				meld_action_list = meld_action_str.split(' ')[1:]
 				if len(meld_action_list) == 0:
-						print("No cards were given to meld!")
+						print("No cards were given to meld!\n")
 						continue
 
 				indicies = []
@@ -74,8 +87,13 @@ class HumanAgent(IAgent):
 				print (hand_str)
 				print ("Meld Created:\n%s\n" % m)
 				meld_list.append(m)
+
 			elif (meld_action_str[0] == 'E'):
 				break
+
+			else:
+				print("Invalid choice!\n")
+				continue
 			
 		return meld_list	
 		
@@ -92,7 +110,17 @@ class HumanAgent(IAgent):
 		discard_action = -2 # This will be set by the user 
 		while(True):
 			discard_action_str = input("What would you like to do? ")
-			discard_action = int(discard_action_str)
+			
+			if (len(discard_action_str) == 0):
+				print("Invalid choice!\n")
+				continue
+
+			try:
+				discard_action = int(discard_action_str)
+			except:
+				print("Must input an integer!\n")
+				continue
+
 			if ((discard_action >= -1) and (discard_action < len(self.sanitized_game.players[self.player_number].hand))):
 				break
 			print ("Invalid choice entered, try again.")
