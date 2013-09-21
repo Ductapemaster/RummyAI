@@ -60,7 +60,7 @@ class GameRunner():
 
 			discard = self.agents[cur_player].getDiscardAction() 
 
-			success = self.game.applyDiscardAction(discard)
+			success = self.game.applyDiscardAction(cur_player, discard)
 			if not success:
 				return False
 
@@ -68,7 +68,7 @@ class GameRunner():
 
 			# Check for win condition
 
-			if self.game.player[cur_player].hand.size() == 0:
+			if len(self.game.players[cur_player].hand) == 0:
 				self.winner = cur_player
 				break
 
