@@ -44,11 +44,15 @@ class HumanAgent(IAgent):
 			meld_action_str = input("What would you like to do?")
 
 			if (meld_action_str[0] == 'M'):
-				meld_action_list = meld_action_str.split(' ')
+				
+				meld_action_list = meld_action_str.split(' ')[1:]
+				if len(meld_action_list) == 0:
+						print("No cards were given to meld!")
+						continue
 
 				indicies = []
 				try:
-					for idx_str in meld_action_list[1:]:
+					for idx_str in meld_action_list:
 						indicies.append(int(idx_str))
 				except:
 					print("could not convert card index (%s) to int" % idx_str)
