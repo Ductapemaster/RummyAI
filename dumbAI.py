@@ -1,6 +1,8 @@
 import random
 
-class dumbAI():
+from iAgent import *
+
+class DumbAI(IAgent):
 
 	def getDrawAction(self):
 		return 0
@@ -9,4 +11,5 @@ class dumbAI():
 		return []
 
 	def getDiscardAction(self):
-		return random.randint(0, len(self.game.players[self.player_num].hand))
+		rand_index = random.randint(0, len(self.game.players[self.player_number].hand))
+		return self.game.players[self.player_number].hand[rand_index]
