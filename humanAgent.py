@@ -36,6 +36,7 @@ class HumanAgent(IAgent):
 	def getMeldActions(self):
 
 		print ("Player %d, do you want to meld any cards?  Current Game State:\n" % self.player_number)
+		self.sanitized_game.players[self.player_number].hand = sorted(self.sanitized_game.players[self.player_number].hand, key=attrgetter( 'alt_rank', 'suit'))
 		print (self.sanitized_game)
 		print ("Actions:\n\'M <Card 1 Idx> <Card 2 Idx> ... <Card N Idx>\': Create meld of N cards\n\'E\': End meld phase")
 		
@@ -80,6 +81,7 @@ class HumanAgent(IAgent):
 		
 	def getDiscardAction(self):
 		print ("Current Game State:")
+		self.sanitized_game.players[self.player_number].hand = sorted(self.sanitized_game.players[self.player_number].hand, key=attrgetter( 'alt_rank', 'suit'))
 		print (self.sanitized_game)
 		print ("")
 		print ("Actions:")
