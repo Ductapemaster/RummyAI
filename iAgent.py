@@ -4,8 +4,9 @@ class IAgent():
 	def setPlayerNumber(self, player_number):
 		self.player_number = player_number
 
-	def updateGameState(self, game):
-		pass
+	# Simply stores new game state locally
+	def updateGameState(self, sanitized_game):
+		self.game = sanitized_game
 
 	def getDrawAction(self):
 		# Return an integer

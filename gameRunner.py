@@ -1,4 +1,5 @@
 import random
+import os
 
 from iAgent import *
 from humanAgent import *
@@ -77,6 +78,8 @@ class GameRunner():
 			# let the next player go
 			cur_player = (cur_player + 1) % self.num_players
 
+			# clear the screen
+			os.system('cls' if os.name == 'nt' else 'clear')
 
 	def updateAgentWithGameState(self, agent_number):
 			game_copy = self.game.getSanitizedCopy(agent_number)
