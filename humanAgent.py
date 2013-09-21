@@ -9,21 +9,17 @@ class HumanAgent(IAgent):
 		self.players = []
 		self.discard_pile = []
 		
-	# Simply stores new game state locally
-	def updateGameState(self, sanitized_game):
-		self.sanitized_game = sanitized_game
-		
 	def getDrawAction(self):
 		print ("It is Player %d's turn. Current Game State:\n" % (self.player_number + 1))
-		self.sanitized_game.players[self.player_number].hand = sorted(self.sanitized_game.players[self.player_number].hand, key=attrgetter( 'alt_rank', 'suit'))
-		print (self.sanitized_game)
+		self.game.players[self.player_number].hand = sorted(self.game.players[self.player_number].hand, key=attrgetter( 'alt_rank', 'suit'))
+		print (self.game)
 		print ("\nActions:\n0: Draw top card off of draw pile\nN: Pickup N cards from discard pile")
 		
 		draw_action = -1 # This will be set by the user 
 		while(True):
 			draw_action_str = input("What would you like to do? ")
 			draw_action = int(draw_action_str)
-			if ((draw_action >= 0) and (draw_action <= len(self.sanitized_game.discard_pile))):
+			if ((draw_action >= 0) and (draw_action <= len(self.game.discard_pile))):
 				break
 			print ("Invalid choice entered, try again.")
 		
@@ -36,8 +32,8 @@ class HumanAgent(IAgent):
 	def getMeldActions(self):
 
 		print ("Player %d, do you want to meld any cards?  Current Game State:\n" % self.player_number)
-		self.sanitized_game.players[self.player_number].hand = sorted(self.sanitized_game.players[self.player_number].hand, key=attrgetter( 'alt_rank', 'suit'))
-		print (self.sanitized_game)
+		self.game.players[self.player_number].hand = sorted(self.game.players[self.player_number].hand, key=attrgetter( 'alt_rank', 'suit'))
+		print (self.game)
 		print ("Actions:\n\'M <Card 1 Idx> <Card 2 Idx> ... <Card N Idx>\': Create meld of N cards\n\'E\': End meld phase")
 		
 		meld_list = []
@@ -61,16 +57,16 @@ class HumanAgent(IAgent):
 
 				cards = []
 				for idx in indicies:
-					cards.append(self.sanitized_game.players[self.player_number].hand[idx])
+					cards.append(self.game.players[self.player_number].hand[idx])
 
 				m = Meld(cards)
 				for card in cards:
-					self.sanitized_game.players[self.player_number].hand.remove(card)
+					self.game.players[self.player_number].hand.remove(card)
 				
 				hand_str = ""
 				hand_str += "\nHand:\n"
-				for idx in range(len(self.sanitized_game.players[self.player_number].hand)):
-					hand_str += "%d: %s\n" %(idx, self.sanitized_game.players[self.player_number].hand[idx])
+				for idx in range(len(self.game.players[self.player_number].hand)):
+					hand_str += "%d: %s\n" %(idx, self.game.players[self.player_number].hand[idx])
 				print (hand_str)
 				print ("Meld Created:\n%s\n" % m)
 				meld_list.append(m)
@@ -81,8 +77,8 @@ class HumanAgent(IAgent):
 		
 	def getDiscardAction(self):
 		print ("Current Game State:")
-		self.sanitized_game.players[self.player_number].hand = sorted(self.sanitized_game.players[self.player_number].hand, key=attrgetter( 'alt_rank', 'suit'))
-		print (self.sanitized_game)
+		self.game.players[self.player_number].hand = sorted(self.game.players[self.player_number].hand, key=attrgetter( 'alt_rank', 'suit'))
+		print (self.game)
 		print ("")
 		print ("Actions:")
 		print ("N: Discard Card at index N, (0 based)")
@@ -93,7 +89,7 @@ class HumanAgent(IAgent):
 		while(True):
 			discard_action_str = input("What would you like to do? ")
 			discard_action = int(discard_action_str)
-			if ((discard_action >= -1) and (discard_action < len(self.sanitized_game.players[self.player_number].hand))):
+			if ((discard_action >= -1) and (discard_action < len(self.game.players[self.player_number].hand))):
 				break
 			print ("Invalid choice entered, try again.")
 		
@@ -101,7 +97,7 @@ class HumanAgent(IAgent):
 			print ("It's been nice knowing you...")
 			return Card()
 		else:
-			c = self.sanitized_game.players[self.player_number].hand[discard_action]
+			c = self.game.players[self.player_number].hand[discard_action]
 			print ("Discarding %s." % c)
 			return c
 		
