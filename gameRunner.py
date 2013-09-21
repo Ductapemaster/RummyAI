@@ -56,6 +56,8 @@ class GameRunner():
 			if not success:
 				return False
 
+			self.updateAgentWithGameState(cur_player)
+
 			# Discard Phase
 
 			discard = self.agents[cur_player].getDiscardAction() 
