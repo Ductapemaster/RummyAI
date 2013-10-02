@@ -10,33 +10,30 @@ class GameRunnerTests(unittest.TestCase):
 	def test_constructor_works_as_expected(self):
 		gr = GameRunner()
 	
-	def test_createNewGame_works_as_expected(self):
-		gr = GameRunner()
+	def test_GamePackage_is_constructable(self):
 
 		agents = []
 		agents.append(IAgent())
 		agents.append(IAgent())
 
-		gr.createNewGame(agents)
+		g = GamePackage(agents)
 
-		self.assertEqual(gr.num_players, len(agents))
-		self.assertEqual(gr.agents, agents)
-		self.assertEqual(type(gr.game), Game)
-		self.assertEqual(gr.game.numPlayers(), gr.num_players)
+		self.assertEqual(g.num_players, len(agents))
+		self.assertEqual(g.agents, agents)
+		self.assertEqual(type(g.game), Game)
+		self.assertEqual(g.game.numPlayers(), g.num_players)
 
 
-	def test_createNewGame_raises_exception_if_no_agents(self):
-		gr = GameRunner()
+	def test_GamePackage_raises_error_if_agent_list_is_empty(self):
 		agents = []
 
-		self.assertRaises(ValueError, gr.createNewGame, agents)
+		self.assertRaises(ValueError, GamePackage, agents)
 
-	def test_createNewGame_raises_exception_if_one_agents(self):
-		gr = GameRunner()
+	def test_GamePackage_raises_exception_if_one_agents(self):
 		agents = []
 		agents.append(IAgent())
 
-		self.assertRaises(ValueError, gr.createNewGame, agents)
+		self.assertRaises(ValueError, GamePackage, agents)
 	
 
 
