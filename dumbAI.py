@@ -57,6 +57,11 @@ class DumbAI(IAgent):
 		return best_meld_combo
 
 	def getDiscardAction(self):
-		rand_index = random.randint(0, len(self.game.players[self.player_number].hand))
-		return self.game.players[self.player_number].hand[rand_index]
+		num_cards_in_hand = len(self.game.players[self.player_number].hand) 
+		if num_cards_in_hand > 1:
+			rand_index = random.randint(0, num_cards_in_hand - 1)
+			return self.game.players[self.player_number].hand[rand_index]
+		else:
+			return self.game.players[self.player_number].hand[0]
+
 
