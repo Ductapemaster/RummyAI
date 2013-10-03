@@ -81,7 +81,7 @@ class Game:
 
 			for i in range(action):
 				c = self.discard_pile.pop()
-				self.last_card_removed_from_discard_pile = copy.copy(c)
+				self.last_card_removed_from_discard_pile = copy.deepcopy(c)
 				self.players[player_num].draw(c)
 
 		return True

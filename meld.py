@@ -147,3 +147,8 @@ class Meld:
 		else:
 			return False
 
+	def numPoints(self):
+		p = 0
+		for c in self.cards:
+			p += c.numPoints()
+		return p

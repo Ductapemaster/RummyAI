@@ -1,4 +1,5 @@
 from card import *
+import copy
 
 class Player:
 	def __init__(self):

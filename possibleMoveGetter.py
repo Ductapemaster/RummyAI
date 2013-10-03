@@ -7,7 +7,7 @@ def sortCardsByRank(cards):
 def sortCardsBySuit(cards):
 	return sorted(cards, key=attrgetter('suit', 'rank'))
 
-def getfeasible(hand):
+def get_possible(hand):
 	result = []
 
 	num_cards = len(hand)
@@ -64,4 +64,16 @@ def getfeasible(hand):
 	return result 
 
 
+def has_no_duplicate_cards(melds):
+	cards = []
+	for m in melds:
+		cards.extend(m.cards)
+	
+	sc = sortCardsByRank(cards)
 
+	for i in range(len(sc)-1):
+		if sc[i] == sc[i+1]:
+			return False
+
+	return True
+	
