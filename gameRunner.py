@@ -24,7 +24,7 @@ class GamePackage():
 		# set some internal variables
 		self.starting_player = starting_player
 		self.winner = -1
-
+		self.score = [0]*self.num_players
 
 	def updateAgentWithGameState(self, agent_number):
 			game_copy = self.game.getSanitizedCopy(agent_number)
@@ -80,9 +80,20 @@ class GameRunner():
 
 			if len(game_pkg.game.players[cur_player].hand) == 0:
 				game_pkg.winner = cur_player
+				self.UpdateScore(game_pkg)
 				break
 
 			# let the next player go
 			cur_player = (cur_player + 1) % game_pkg.num_players
 
+	def UpdateScore(self, game_pkg):
 
+		for p in range(game_pkg.num_players):
+			score = 0
+			for meld in game_pkg.game.players[p].board:
+				score += meld.numPoints()
+
+			for card in game_pkg.game.players[p].hand:
+				score -= card.numPoints()
+
+			game_pkg.score[p] = score
